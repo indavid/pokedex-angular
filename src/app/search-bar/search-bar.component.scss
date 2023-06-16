@@ -1,7 +1,7 @@
 .search-bar {
   display: flex;
   align-items: center;
-  max-width: 400px;
+  width: 400px;
   padding: 5px;
   padding-left: 8px;
   border-radius: 5px;
@@ -28,7 +28,7 @@
   position: absolute;
   top: 54px;
   left: 14px;
-  max-width: 382px;
+  width: 382px;
   border: 1px solid #ced4d9;
   background-color: white;
   padding: 20px;
@@ -67,6 +67,10 @@
 @media (max-width: 768px) {
   .search-bar {
     width: 100%;
+  }
+
+  .search-dropdown {
+    width: 93%;
   }
 
   .pi-search {
