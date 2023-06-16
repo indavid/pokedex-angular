@@ -1,0 +1,29 @@
+<div class="search-bar">
+  <span class="pi pi-search"></span>
+  <input
+    type="text"
+    pInputText
+    [(ngModel)]="searchQuery"
+    placeholder="Search Pokemon..."
+    (input)="search()"
+    (keydown.arrowdown)="selectNextSuggestion()"
+    (keydown.arrowup)="selectPreviousSuggestion()"
+    (keydown.enter)="onEnter()"
+    (click)="showDropdown()"
+    (focusout)="hideDropdown()"
+  />
+  <div class="search-dropdown" [hidden]="suggestions.length === 0">
+    <p class="search-dropdown-label">Pokemon</p>
+    <ul class="search-dropdown-list">
+      <li
+        class="search-dropdown-item"
+        *ngFor="let suggestion of suggestions; let i = index"
+        [class.selector]="i === selectedSuggestionIndex"
+        (mousedown)="onSuggestionClick(suggestion)"
+        tabindex="0"
+      >
+        {{ suggestion | titlecase }}
+      </li>
+    </ul>
+  </div>
+</div>

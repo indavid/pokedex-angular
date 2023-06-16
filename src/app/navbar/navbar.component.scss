@@ -1,0 +1,29 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  box-shadow: 0 2px 4px rgba(0, 1, 1, 0.2);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .logo h3 {
+    display: none;
+  }
+}
+
+a {
+  color: black;
+}
+
+.pi.pi-github {
+  color: black;
+  font-size: 150%;
+}

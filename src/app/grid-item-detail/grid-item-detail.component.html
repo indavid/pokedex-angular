@@ -1,0 +1,108 @@
+<app-loading *ngIf="isLoading; else content"></app-loading>
+
+<ng-template #content>
+  <div class="detail-container">
+    <div class="detail-card">
+      <div class="detail-title">
+        <h1 class="detail-title-name">
+          {{ this.pokemon.name | titlecase }}
+        </h1>
+        <h1>#{{ this.pokemon.id }}</h1>
+      </div>
+      <div class="detail-types">
+        <p>
+          <span
+            class="detail-types-box"
+            *ngFor="let item of this.pokemon.types"
+            [ngClass]="getTypeColorClass(item.type.name)"
+            >{{ item.type.name | titlecase }}</span
+          >
+        </p>
+      </div>
+      <div class="detail-flex-img">
+        <img
+          class="detail-img"
+          [src]="'assets/pokemon/' + this.pokemon.id + '.png'"
+          alt="Pokemon Image"
+        />
+      </div>
+      <div class="detail-size">
+        <div class="detail-size-height">
+          <h4>Height</h4>
+          <h2>{{ this.pokemon.height | number : "1.2-2" }} m</h2>
+        </div>
+        <div class="detail-size-weight">
+          <h4>Weight</h4>
+          <h2>{{ this.pokemon.weight | number : "1.2-2" }} kg</h2>
+        </div>
+      </div>
+
+      <p-chart type="radar" [data]="basicData"></p-chart>
+      <div class="detail-stats">
+        <p>HP: {{ this.pokemon.stats[0].base_stat }}</p>
+        <app-progress-bar
+          [stat]="this.pokemon.stats[0].base_stat"
+        ></app-progress-bar>
+        <p>Attack: {{ this.pokemon.stats[1].base_stat }}</p>
+        <app-progress-bar
+          [stat]="this.pokemon.stats[1].base_stat"
+        ></app-progress-bar>
+        <p>Defense: {{ this.pokemon.stats[2].base_stat }}</p>
+        <app-progress-bar
+          [stat]="this.pokemon.stats[2].base_stat"
+        ></app-progress-bar>
+        <p>Special-attack: {{ this.pokemon.stats[3].base_stat }}</p>
+        <app-progress-bar
+          [stat]="this.pokemon.stats[3].base_stat"
+        ></app-progress-bar>
+        <p>Special-deferense: {{ this.pokemon.stats[4].base_stat }}</p>
+        <app-progress-bar
+          [stat]="this.pokemon.stats[4].base_stat"
+        ></app-progress-bar>
+        <p>Speed: {{ this.pokemon.stats[5].base_stat }}</p>
+        <app-progress-bar
+          [stat]="this.pokemon.stats[5].base_stat"
+        ></app-progress-bar>
+        <p style="font-weight: bold">Total Base Stat: {{ this.sum }}</p>
+      </div>
+    </div>
+    <div class="detail-description">
+      <div>
+        <h2>Description</h2>
+        <p class="detail-description-text">
+          {{ getFlavorText(this.species.flavor_text_entries, "en") }}
+        </p>
+        <p>{{ getFlavorText(this.species.flavor_text_entries, "ko") }}</p>
+      </div>
+      <div>
+        <h2>Abilities</h2>
+        <p *ngFor="let item of this.pokemon.abilities">
+          {{ item.ability.name | titlecase }}
+        </p>
+      </div>
+      <div>
+        <h2>Gender Ratio</h2>
+        <p>
+          Female: {{ this.species.gender_rate * (1 / 8) | percent }} | Male:
+          {{ 1 - this.species.gender_rate * (1 / 8) | percent }}
+        </p>
+      </div>
+      <div class="detail-description-details">
+        <div class="detail-description-details-flex">
+          <h2>Egg Group</h2>
+          <p *ngFor="let egg of this.species.egg_groups">
+            {{ egg.name | titlecase }}
+          </p>
+        </div>
+        <div class="detail-description-details-flex">
+          <h2>Catch Rate</h2>
+          <p>{{ this.species.capture_rate / 255 | percent }}</p>
+        </div>
+        <div class="detail-description-details-flex">
+          <h2>Color</h2>
+          <p>{{ this.species.color?.name | titlecase }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
