@@ -110,7 +110,12 @@ export class GridItemDetailComponent {
       const entry = flavorTexts.find(
         (flavorText: any) => flavorText.language.name === lang
       );
-      return entry.flavor_text;
+      if (entry) {
+        let cleanedString = entry.flavor_text.replace(/\f/g, " ");
+        return cleanedString;
+      } else {
+        return entry.flavor_text;
+      }
     } else {
       return "";
     }
